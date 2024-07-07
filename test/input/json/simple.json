@@ -1,0 +1,33 @@
+[
+  // a comment
+  {
+    "a": 1,
+    "label": "one", # inline comment
+    "size": 3.14
+  },,,,
+  {
+    "close": false,
+    "open": true,
+    "a": null
+  },
+  [
+    "foo",
+    [
+      2,
+      // another comment
+      "\"three\"",
+      null
+    ]
+  ],
+  {
+    "bar": {
+      "x": 1.2E10,
+      "y": -2.3
+    },
+    "baz": {
+      "y": 2, // also inline
+      "x": 1
+    }
+    ,
+  }
+]
