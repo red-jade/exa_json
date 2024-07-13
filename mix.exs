@@ -5,7 +5,7 @@ defmodule Exa.Json.MixProject do
     [
       app: :exa_json,
       name: "Exa Json",
-      version: "0.1.0",
+      version: "0.1.4",
       elixir: "~> 1.15",
       erlc_options: [:verbose, :report_errors, :report_warnings, :export_all],
       start_permanent: Mix.env() == :prod,
@@ -35,7 +35,7 @@ defmodule Exa.Json.MixProject do
     [
       # runtime code dependencies ----------
 
-      {:exa, git: "https://github.com/red-jade/exa_core.git", tag: "v0.1.2"},
+      {:exa, git: "https://github.com/red-jade/exa_core.git", tag: "v0.1.4"},
 
       # building, documenting, testing ----------
 

@@ -70,22 +70,22 @@ defmodule Exa.Json.JsonReaderTest do
   end
 
   test "basic errors" do
-    assert_raise ArgumentError, fn -> decode(":") end
-    assert_raise ArgumentError, fn -> decode(",") end
-    assert_raise ArgumentError, fn -> decode("}") end
-    assert_raise ArgumentError, fn -> decode("]") end
+    assert {:error, _} = decode(":")
+    assert {:error, _} = decode(",")
+    assert {:error, _} = decode("}")
+    assert {:error, _} = decode("]")
 
-    assert_raise ArgumentError, fn -> decode(~S|["foo": 9]|) end
-    assert_raise ArgumentError, fn -> decode(~S|[[]|) end
-    assert_raise ArgumentError, fn -> decode(~S|[]]|) end
+    assert {:error, _} = decode(~S|["foo": 9]|)
+    assert {:error, _} = decode(~S|[[]|)
+    assert {:error, _} = decode(~S|[]]|)
 
-    assert_raise ArgumentError, fn -> decode(~S|{"foo", 9}|) end
-    assert_raise ArgumentError, fn -> decode(~S|{"foo"  9}|) end
-    assert_raise ArgumentError, fn -> decode(~S|{"foo": 9}}|) end
-    assert_raise ArgumentError, fn -> decode(~S|{"foo": }|) end
-    assert_raise ArgumentError, fn -> decode(~S|{9: "foo"}|) end
-    assert_raise ArgumentError, fn -> decode(~S|{ } }|) end
-    assert_raise ArgumentError, fn -> decode(~S|{ { }|) end
+    assert {:error, _} = decode(~S|{"foo", 9}|)
+    assert {:error, _} = decode(~S|{"foo"  9}|)
+    assert {:error, _} = decode(~S|{"foo": 9}}|)
+    assert {:error, _} = decode(~S|{"foo": }|)
+    assert {:error, _} = decode(~S|{9: "foo"}|)
+    assert {:error, _} = decode(~S|{ } }|)
+    assert {:error, _} = decode(~S|{ { }|)
   end
 
   test "commas" do
@@ -99,28 +99,28 @@ defmodule Exa.Json.JsonReaderTest do
     # catch errors
 
     assert 1 = decode("1", comma: true)
-    assert_raise ArgumentError, fn -> decode("[null 9]", comma: true) end
-    assert_raise ArgumentError, fn -> decode("[true 9]", comma: true) end
-    assert_raise ArgumentError, fn -> decode("[false 9]", comma: true) end
-    assert_raise ArgumentError, fn -> decode("[1 9]", comma: true) end
-    assert_raise ArgumentError, fn -> decode("[-1 9]", comma: true) end
-    assert_raise ArgumentError, fn -> decode("[3.1 9]", comma: true) end
-    assert_raise ArgumentError, fn -> decode("[[1] 9]", comma: true) end
-    assert_raise ArgumentError, fn -> decode(~s/[{"a":1} 9]/, comma: true) end
+    assert {:error, _} = decode("[null 9]", comma: true)
+    assert {:error, _} = decode("[true 9]", comma: true)
+    assert {:error, _} = decode("[false 9]", comma: true)
+    assert {:error, _} = decode("[1 9]", comma: true)
+    assert {:error, _} = decode("[-1 9]", comma: true)
+    assert {:error, _} = decode("[3.1 9]", comma: true)
+    assert {:error, _} = decode("[[1] 9]", comma: true)
+    assert {:error, _} = decode(~s/[{"a":1} 9]/, comma: true)
 
-    assert_raise ArgumentError, fn -> decode("[1,9,]", comma: true) end
-    assert_raise ArgumentError, fn -> decode("[1,,9]", comma: true) end
-    assert_raise ArgumentError, fn -> decode("[1,9],", comma: true) end
-    assert_raise ArgumentError, fn -> decode(",[1,9]", comma: true) end
-    # assert_raise ArgumentError, fn -> decode("[,1,9]", comma: true) end
+    assert {:error, _} = decode("[1,9,]", comma: true)
+    assert {:error, _} = decode("[1,,9]", comma: true)
+    assert {:error, _} = decode("[1,9],", comma: true)
+    assert {:error, _} = decode(",[1,9]", comma: true)
+    # assert {:error, _} = decode("[,1,9]", comma: true)
 
-    assert_raise ArgumentError, fn -> decode(~s/{"a": 1,}/, comma: true) end
-    assert_raise ArgumentError, fn -> decode(~s/{"a": 1,,"b":2}/, comma: true) end
-    assert_raise ArgumentError, fn -> decode(~s/{,"a": 1}/, comma: true) end
-    assert_raise ArgumentError, fn -> decode(~s/{"a":, 1}/, comma: true) end
-    assert_raise ArgumentError, fn -> decode(~s/{"a",: 1}/, comma: true) end
-    assert_raise ArgumentError, fn -> decode(~s/,{"a": 1}/, comma: true) end
-    assert_raise ArgumentError, fn -> decode(~s/{"a": 1},/, comma: true) end
+    assert {:error, _} = decode(~s/{"a": 1,}/, comma: true)
+    assert {:error, _} = decode(~s/{"a": 1,,"b":2}/, comma: true)
+    assert {:error, _} = decode(~s/{,"a": 1}/, comma: true)
+    assert {:error, _} = decode(~s/{"a":, 1}/, comma: true)
+    assert {:error, _} = decode(~s/{"a",: 1}/, comma: true)
+    assert {:error, _} = decode(~s/,{"a": 1}/, comma: true)
+    assert {:error, _} = decode(~s/{"a": 1},/, comma: true)
   end
 
   test "simple file" do
@@ -135,7 +135,7 @@ defmodule Exa.Json.JsonReaderTest do
     assert @simple_pt == jsonpt
 
     # fails if comments are not removed
-    assert_raise ArgumentError, fn -> from_json(file("simple")) end
+    assert {:error, _} = from_json(file("simple"))
   end
 
   test "geojson file" do

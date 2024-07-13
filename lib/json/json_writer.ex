@@ -16,7 +16,7 @@ defmodule Exa.Json.JsonWriter do
   # document ----------
 
   @doc "Write JSON data to file."
-  @spec to_file(J.value(), String.t()) :: T.textdata()
+  @spec to_file(J.value(), String.t()) :: T.textdata() | {:error, any()}
   def to_file(value, filename) when is_nonempty_string(filename) do
     value |> encode() |> Exa.File.to_file_text(filename)
   end

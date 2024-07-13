@@ -22,11 +22,13 @@ defmodule Exa.Json.JsonReader do
 
   See `decode` for descritption of the `:options`.
   """
-  @spec from_json(String.t(), E.options()) :: J.value()
+  @spec from_json(String.t(), E.options()) :: J.value() | {:error, any()}
   def from_json(filename, opts \\ []) when is_nonempty_string(filename) do
     # don't handle comments in the file reader
     # because lexer now handles inline comments and needs the newlines
     filename |> Exa.File.from_file_text() |> Exa.File.bom!() |> decode(opts)
+  rescue
+    err -> {:error, err}
   end
 
   @doc """
@@ -63,7 +65,7 @@ defmodule Exa.Json.JsonReader do
   `Map` will remove duplicates, with last instance prevailing;
   the struct `Factory` behaves like `Map`.
   """
-  @spec decode(String.t(), E.options()) :: J.value()
+  @spec decode(String.t(), E.options()) :: J.value() | {:error, any()}
   def decode(json, opts \\ []) when is_string(json) do
     ca = Option.get_bool(opts, :comma, false)
     cms = Option.get_list_nonempty_string(opts, :comments, [])
@@ -85,6 +87,8 @@ defmodule Exa.Json.JsonReader do
       end
 
     json |> lex(cms, ca, []) |> parse([], ca, facfun)
+  rescue
+    err -> {:error, err}
   end
 
   # ------
