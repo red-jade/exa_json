@@ -1,4 +1,4 @@
-## EXA Json
+# EXA Json
 
 𝔼𝕏tr𝔸 𝔼li𝕏ir 𝔸dditions (𝔼𝕏𝔸)
 
@@ -8,13 +8,18 @@ Utilities for reading and writing JSON data.
 
 Module path: `Exa.Json`
 
-### Features
+## Features
 
 - Read JSON files and decode JSON data
 - Write JSON files and encode JSON data
 - Configure data value parsers
 
-### Benchmarks
+## Building
+
+To bootstrap an `exa_xxx` library build, 
+you must run `mix deps.get` twice.
+
+## Benchmarks
 
 Exa uses _Benchee_ for performancee testing.
 
@@ -29,7 +34,7 @@ To run specific benchmark test, for example:
 
 `$ mix test --only benchmark:true test/exa/json/json_resder_test.exs`
 
-### License
+## EXA License
 
 EXA source code is released under the MIT license.
 
