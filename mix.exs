@@ -73,6 +73,7 @@ defmodule Exa.Json.MixProject do
       {
         :pkg_json, 
         git: "https://github.com/pkg/json.git", 
+        branch: "main",
         only: :dev, 
         runtime: false, 
         app: false
