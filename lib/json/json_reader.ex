@@ -23,7 +23,7 @@ defmodule Exa.Json.JsonReader do
   See `decode` for descritption of the `:options`.
   """
   @spec from_json(String.t(), E.options()) :: J.value() | {:error, any()}
-  def from_json(filename, opts \\ []) when is_nonempty_string(filename) do
+  def from_json(filename, opts \\ []) when is_string_nonempty(filename) do
     # don't handle comments in the file reader
     # because lexer now handles inline comments and needs the newlines
     filename |> Exa.File.from_file_text() |> Exa.File.bom!() |> decode(opts)

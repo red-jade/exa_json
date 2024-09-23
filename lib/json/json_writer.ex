@@ -17,7 +17,7 @@ defmodule Exa.Json.JsonWriter do
 
   @doc "Write JSON data to file."
   @spec to_file(J.value(), String.t()) :: T.textdata() | {:error, any()}
-  def to_file(value, filename) when is_nonempty_string(filename) do
+  def to_file(value, filename) when is_string_nonempty(filename) do
     value |> encode() |> Exa.File.to_file_text(filename)
   end
 
@@ -39,7 +39,7 @@ defmodule Exa.Json.JsonWriter do
   @spec root(I.indent(), J.value()) :: I.indent()
 
   defp root(io, []), do: io |> txtl("[]")
-  defp root(io, m) when is_empty_map(m), do: io |> txtl("{}")
+  defp root(io, m) when is_map_empty(m), do: io |> txtl("{}")
   defp root(io, map) when is_map(map), do: root(io, Map.to_list(map))
 
   # object
