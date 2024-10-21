@@ -3,7 +3,7 @@ defmodule Exa.Json.MixProject do
 
   @lib  :exa_json
   @name "Exa Json"
-  @ver  "0.2.4"
+  @ver  "0.3.0"
 
   # umbrella project
   @exa {:exa,
