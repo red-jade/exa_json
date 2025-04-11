@@ -23,7 +23,7 @@ you must run `mix deps.get` twice.
 
 Exa uses _Benchee_ for performancee testing.
 
-Test results are stored under `text/bench/*.benchee`.
+Test results are stored under `test/bench/*.benchee`.
 The current _latest_ baseline and previous results are checked-in.
 
 Run the benchmarks and compare with latest result:
@@ -32,7 +32,7 @@ Run the benchmarks and compare with latest result:
 
 To run specific benchmark test, for example:
 
-`$ mix test --only benchmark:true test/exa/json/json_resder_test.exs`
+`$ mix test --only benchmark:true test/exa/json/json_reader_test.exs`
 
 ## EXA License
 
